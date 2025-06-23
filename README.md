@@ -22,15 +22,21 @@ The `Body` should be a JSON object with variables (which can be added via the `/
 
 ```
 {
-    "name": {Full Name},
-    "company": {
-        "name": {Company Name},
-        "description": {Company Description}
+    "template": "Hello [Name], how are you today?...",
+    "prompt": "Be formal, but excited!",
+    "person": {
+        "name": {Full Name},
+        "company": {
+            "name": {Company Name},
+            "description": {Company Description}
+        }
     }
 }
 ```
 
-The more data you pass to the agent from Clay, the better the returned email body content will be. Your JSON structure should be clearly organized and have descriptive names for keys so the agent understands the data you're passing without the need for a schema.
+The more data you pass to the agent from Clay, the better the returned email body content will be. Your `person` JSON structure should be clearly organized and have descriptive names for keys so the agent understands the data you're passing without the need for a schema.
+
+By default, this agent expects the email `template` and any _additional_ `prompt` details to be sent along in the body as well. This is so that dynamic campaigns can be made through Clay lists. If you don't need this, you can simply hardcode the template into the agent or store it elsewhere (KV, 3rd-party service, etc).
 
 Finally, after the `HTTP API` enrichment column, add a new `Text` column and edit it. In the content area, type `/HTTP API` and save. You can also edit the column name to be more descriptive.
 
