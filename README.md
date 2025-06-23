@@ -8,9 +8,33 @@
     <br />
 </div>
 
-# 🤖 Bun Agent Project
+# 🤖 SDR Agent
 
-Welcome to your Agentuity Bun Agent project! This README provides essential information to help you get started with developing, testing, and deploying your AI agents.
+This agent takes an HTTP request from Clay containing profile data about a person and generates a customized version of an email template, returning the email body to Clay for use in later workflows.
+
+## 🌈 Clay Configuration
+
+After making any desired changes to the agent code (such as customizing the email template and prompt instructions), deploy your agent to Agentuity (`agentuity deploy`). Navigate to the agent's detail page in Agentuity and create a new `API` IO; you can remove the pre-existing `Webhook` IO. It is _highly_ recommended to add authorization to the API endpoint.
+
+Create a new `HTTP API` enrichment in Clay after you've enriched both the company and person. Edit the HTTP API enrichment and set the `Method` to `POST`, the `Endpoint` to the URL of your agent's API IO, add the `Headers` for `Content-Type` and (if applicable) `Authorization` (also from the API IO), and begin populating the `Body`.
+
+The `Body` should be a JSON object with variables (which can be added via the `/` command), for example:
+
+```
+{
+    "name": {Full Name},
+    "company": {
+        "name": {Company Name},
+        "description": {Company Description}
+    }
+}
+```
+
+The more data you pass to the agent from Clay, the better the returned email body content will be. Your JSON structure should be clearly organized and have descriptive names for keys so the agent understands the data you're passing without the need for a schema.
+
+Finally, after the `HTTP API` enrichment column, add a new `Text` column and edit it. In the content area, type `/HTTP API` and save. You can also edit the column name to be more descriptive.
+
+That's it! You can now use the email content in your workflows.
 
 ## 📋 Prerequisites
 
@@ -72,24 +96,6 @@ This command will bundle your agent and deploy it to the cloud, making it access
 ## 🔧 Configuration
 
 Your project configuration is stored in `agentuity.yaml`. This file defines your agents, development settings, and deployment configuration.
-
-## 🛠️ Advanced Usage
-
-### Environment Variables
-
-You can set environment variables for your project:
-
-```bash
-agentuity env set KEY VALUE
-```
-
-### Secrets Management
-
-For sensitive information, use secrets:
-
-```bash
-agentuity env set --secret KEY VALUE
-```
 
 ## 📖 Documentation
 
