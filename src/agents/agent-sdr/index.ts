@@ -17,24 +17,26 @@ export const welcome = () => {
 			{
 				data: {
 					person: {
-						name: { first: "Matthew", last: "Congrove" },
-						title: "Co-Founder",
+						name: {
+							first: "Jane",
+							last: "Doe",
+						},
 						company: {
-							name: "Agentuity",
+							name: "Cyan",
 							description:
-								"The cloud platform purpose-built for deploying, managing, and scaling AI agents.\n\nWe're witnessing a fundamental shift in software: from human-driven, AI-assisted applications to AI-driven, fully autonomous agents. These agents need to self-learn, self-replicate, and self-heal at scale. They require different computing paradigms, different deployment models, and different infrastructure than what exists today.\n\nTraditional clouds force AI agents into a box designed for web apps and mobile backends. It's like trying to run a modern electric vehicle on infrastructure built for steam engines. We believe the next generation of breakthrough AI applications will be built on infrastructure specifically designed for autonomous agents.",
+								"A comprehensive project management and team collaboration platform that helps growing businesses streamline their workflows and boost productivity.\n\nCyan combines task management, resource planning, and real-time communication in one intuitive platform. With advanced reporting and analytics, teams can track project progress, identify bottlenecks, and optimize their processes for maximum efficiency.\n\nServing over 5,000 companies worldwide, from startups to enterprise teams, Cyan has become the go-to solution for organizations looking to scale their operations without losing sight of what matters most.",
 						},
 						role: {
-							title: "Co-Founder",
+							title: "CTO",
 							summary:
-								"Co-founded this company with a mission to create an AI agent cloud platform. Aside from engineering work, I'm responsible for product, design, marketing, and operations.",
+								"Leads the technology strategy and engineering organization at Cyan. Responsible for architecting scalable systems, building high-performing engineering teams, and driving technical innovation to support the company's rapid growth and customer success.",
 						},
-						location: "Austin, Texas, United States",
+						location: "Amarillo, Texas, United States",
 					},
 					template:
-						"Hi {{First Name}},\n\nFound out {{Company Name}} is building AI agents. Are you frustrated by forcing them onto legacy systems? It's like trying to squeeze a elephant through a keyhole.\n\nWe developed the first cloud where agents, not humans, are the primary users. Single command deployment. No access control puzzles, no security group complications, no system headaches.\n\nCompanies are shipping agents in record time. Works with your favorite frameworks like CrewAI, LangChain, and Vercel AI SDK.\n\nCan I show you a brief demo? I would love your feedback.\n\nBest,\nRick Blalock\nFounder, Agentuity",
+						"Hi [First Name],\n\nFound out [Company Name] is building AI agents. Are you frustrated by forcing them onto legacy systems? It's like trying to squeeze an elephant through a keyhole.\n\nWe developed the first cloud where agents, not humans, are the primary users. Single command deployment. No access control puzzles, no security group complications, no system headaches.\n\nCompanies are shipping agents in record time. Works with your favorite frameworks like CrewAI, LangChain, and Vercel AI SDK.\n\nCan I show you a brief demo? I would love your feedback.\n\nBest,\nRick Blalock\nFounder, Agentuity",
 					prompt:
-						"If the person is in the south Florida metro area (Palm Beach, Miami, etc), in addition to the demo call-to-action, also offer to meet in-person. If the person is in the Austin metro area, offer to have them meet with co-founder Jeff.",
+						"If the person is in the south Florida metro area (Palm Beach, Miami, etc), in addition to the demo call-to-action, also offer to meet in-person. If the person is in the Austin metro area, offer to have them meet with co-founder Jeff. If offering to meet in person, make sure to use that phrase and note that the person is in the same city as the co-founder.",
 				},
 				contentType: "application/json",
 			},
@@ -53,7 +55,7 @@ export default async function Agent(
 
 		const result = await generateText({
 			model: groq("llama-3.3-70b-versatile"),
-			prompt: `You are an SDR. You are given a JSON object containing information about a person. You are to generate a customized version of an email message to the person. You should keep the message as close to the template as possible, but switch up words so we don't get flagged as spam and tweak or add a bit to the message if there's an opportunity to use the person's title, role summary, or company description.
+			prompt: `You are an SDR. You are given a JSON object containing information about a person. You are to generate a customized version of an email message to the person. You should keep the message as close to the template as possible, but (a) switch up words so we don't get flagged as spam and (b) tweak or add a bit to the message if there's an opportunity to use the person's title or role summary, or (as a fallback) the company description. Try to keep the message short, within about 50 to 75 words of the template's original wordcount.
 
       ${prompt}
 
