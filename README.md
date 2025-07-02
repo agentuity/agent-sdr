@@ -10,11 +10,13 @@
 
 # 🤖 SDR Agent
 
-This agent takes an HTTP request from Clay containing profile data about a person and generates a customized version of an email template, returning the email body to Clay for use in later workflows.
+This agent takes an HTTP request from Clay containing a campaign summary prompt and profile data about a person to generate a customized email message, returning the contents to Clay for use in later workflows.
 
 ## 🌈 Clay Configuration
 
-After making any desired changes to the agent code (such as customizing the email template and prompt instructions), deploy your agent to Agentuity (`agentuity deploy`). Navigate to the agent's detail page in Agentuity and create a new `API` IO; you can remove the pre-existing `Webhook` IO. It is _highly_ recommended to add authorization to the API endpoint.
+After making any desired changes to the agent code (such as customizing the prompt instructions), deploy your agent to Agentuity (`agentuity deploy`). Navigate to the agent's detail page in Agentuity and create a new `API` IO; you can remove the pre-existing `Webhook` IO. It is _highly_ recommended to add authorization to the API endpoint.
+
+### Step 1: Request
 
 Create a new `HTTP API` enrichment in Clay after you've enriched both the company and person. Edit the HTTP API enrichment and set the `Method` to `POST`, the `Endpoint` to the URL of your agent's API IO, add the `Headers` for `Content-Type` and (if applicable) `Authorization` (also from the API IO), and begin populating the `Body`.
 
@@ -22,23 +24,31 @@ The `Body` should be a JSON object with variables (which can be added via the `/
 
 ```
 {
-    "template": "Hello [Name], how are you today?...",
-    "prompt": "Be formal, but excited!",
     "person": {
-        "name": {Full Name},
-        "company": {
-            "name": {Company Name},
-            "description": {Company Description}
-        }
+        "first_name": {First Name},
+        "role": {Job Title},
+        "company": {Company Name},
+        ...
+    },
+    "prompt": "Be formal, but excited!...",
+    "analysis": {
+        "prospect_fit": "Cyan is a behavioral health and technology company that...",
+        ...
     }
 }
 ```
 
 The more data you pass to the agent from Clay, the better the returned email body content will be. Your `person` JSON structure should be clearly organized and have descriptive names for keys so the agent understands the data you're passing without the need for a schema.
 
-By default, this agent expects the email `template` and any _additional_ `prompt` details to be sent along in the body as well. This is so that dynamic campaigns can be made through Clay lists. If you don't need this, you can simply hardcode the template into the agent or store it elsewhere (KV, 3rd-party service, etc).
+You can also set a `prompt` property which contains information specific to the email campaign you're generating. It is suggested you use Markdown, and specify exactly what your parameters are for each part of the email.
 
-Finally, after the `HTTP API` enrichment column, add a new `Text` column and edit it. In the content area, type `/HTTP API` and save. You can also edit the column name to be more descriptive.
+Finally, you should include `analysis`, which can contain any information you want about the company or the person you're targeting; generally this is generated via an enrichment in conjunction with agent/LLM calls. This includes information like prospect fit, pain points, or key focus areas for the pitch. As with the `person` property, using descriptive key names is helpful.
+
+For examples of the above, reference the default examples in the top part of the agent code.
+
+### Step 2: Response
+
+After the `HTTP API` enrichment column is created from the steps above, add one (or a few) new `Text` columns and edit them. In the content area, type `/HTTP API` and choose your returned property (e.g. `subject`). You can also edit the column names to be more descriptive. These are the columns that you will pass to your email campaign platform.
 
 That's it! You can now use the email content in your workflows.
 
