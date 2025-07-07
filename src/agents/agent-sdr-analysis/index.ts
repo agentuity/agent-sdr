@@ -38,8 +38,8 @@ export default async function Agent(
 ) {
 	try {
 		const data = RequestSchema.parse(await req.data.json());
-		ctx.logger.info("data", data);
 
+		// Perform high-level fit analysis
 		const fit = await generateText({
 			model: openai.responses("gpt-4o-mini"),
 			tools: {
@@ -130,6 +130,7 @@ ${JSON.stringify(data)}`,
 			return resp.text("");
 		}
 
+		// If prospect is a fit, determine the best messaging angle and focus points
 		const analysis = await generateObject({
 			model: groq("llama-3.3-70b-versatile"),
 			schema: z.object({
