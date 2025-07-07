@@ -12,7 +12,7 @@ project_id: proj_877997be0465e2f2298df94636c8edb6
 # The name of the project which is editable
 name: agent-sdr
 # The description of the project which is editable
-description: Builds customized email messages from a Clay table
+description: Qualifies and generates outreach for prospects
 # The development configuration for the project
 development:
   # The port to run the development server on which can be overridden by setting the PORT environment variable
@@ -72,4 +72,9 @@ agents:
   - # The ID of the Agent which is automatically generated
     id: agent_c057502dbd1fc0c50b113dbb3cd39065
     # The name of the Agent which is editable
-    name: agent-sdr
+    name: agent-sdr-email
+    # The description of the Agent which is editable
+    description: Generates customized email messages for a Person
+  - id: agent_36858ca8ba1238a717f77ef4febef226
+    name: agent-sdr-analysis
+    description: Performs fit and messaging analysis on a Company

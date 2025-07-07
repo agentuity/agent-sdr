@@ -1,6 +1,6 @@
 {
   "name": "agent-sdr",
-  "description": "Builds customized email messages from a Clay table",
+  "description": "Qualifies and generates outreach for prospects",
   "version": "0.0.1",
   "main": "index.js",
   "type": "module",
@@ -30,6 +30,7 @@
   "dependencies": {
     "@agentuity/sdk": "^0.0.128",
     "@ai-sdk/groq": "^1.2.9",
+    "@ai-sdk/openai": "^1.3.22",
     "ai": "^4.3.16"
   },
   "module": "index.ts"

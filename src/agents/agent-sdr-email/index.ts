@@ -80,7 +80,7 @@ If offering to meet 'in person', make sure to use that phrase and note that the 
 export const welcome = () => {
 	return {
 		welcome:
-			"Hi, I'm your AI SDR. You can send me a JSON object containing information about a person and I'll generate a customized version of an email template for you.",
+			"Hi, I'm your AI SDR that specializes in generating personalized email templates for qualified Agentuity prospects. You can send me a JSON object containing information about a person and I'll respond with a one-of-a-kind email message for you to send the prospect.",
 		prompts: [
 			{
 				data: {
