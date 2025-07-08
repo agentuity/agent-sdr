@@ -16,7 +16,7 @@ This agent takes data from Clay and (1) generates a company fit analysis and (2)
 
 Skip all the stuff below and watch this step-by-step walkthrough of how to deploy your own version of this agent.
 
-[![IMAGE ALT TEXT](http://img.youtube.com/vi/T4suMYbKuSo/0.jpg)](http://www.youtube.com/watch?v=T4suMYbKuSo "SDR Agent Overview")
+[![SDR Agent Overview](http://img.youtube.com/vi/T4suMYbKuSo/0.jpg)](http://www.youtube.com/watch?v=T4suMYbKuSo "SDR Agent Overview")
 
 ## Customization
 
