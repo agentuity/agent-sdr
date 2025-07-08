@@ -12,6 +12,12 @@
 
 This agent takes data from Clay and (1) generates a company fit analysis and (2) generates a custom campaign email to send to individual prospects.
 
+# Overview
+
+Skip all the stuff below and watch this step-by-step walkthrough of how to deploy your own version of this agent.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/T4suMYbKuSo?si=myh64mpRmGGdazoa" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
 ## Customization
 
 Edit the source code for both agents to customize the prompts for your specific use-case, then deploy your project to Agentuity (`agentuity deploy`). Open each agent in the Agentuity web app and edit the I/O: first remove the default webhooks, then add a new API input. It is _highly_ recommended to add authorization your the API endpoints.
