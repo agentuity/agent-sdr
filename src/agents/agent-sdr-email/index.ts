@@ -147,7 +147,7 @@ export default async function Agent(
 ) {
 	try {
 		const data = RequestSchema.parse(await req.data.json());
-		const { person, prompt } = data;
+		const { person, prompt, analysis } = data;
 
 		const result = await generateObject({
 			model: groq("llama-3.3-70b-versatile"),
@@ -185,7 +185,7 @@ ${JSON.stringify(person)}
 
 # Analysis
 
-${JSON.stringify(data.analysis)}`,
+${JSON.stringify(analysis)}`,
 		});
 
 		return resp.json(result.object);
